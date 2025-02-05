@@ -11,7 +11,7 @@ public class UIManager {
     public GameObject Root => GameObject.Find("@UI_Root") ?? new GameObject { name = "@UI_Root" };
 
     public void SetCanvas(GameObject go, bool sort = true) {
-        Canvas canvas = Util.GetOrAddComponent<Canvas>(go);
+        Canvas canvas = go.GetOrAddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
@@ -27,10 +27,17 @@ public class UIManager {
         name ??= typeof(T).Name;
 
         GameObject go = Manager.Resource.Instantiate($"UIs/Scenes/{name}", Root.transform);
-        T scene = Util.GetOrAddComponent<T>(go);
+        T scene = go.GetOrAddComponent<T>();
         _scene = scene;
         
         return scene;
+    }
+
+    public T MakeSubItem<T>(string name = null, Transform parent = null) where T : UI_Base {
+        name ??= typeof(T).Name;
+
+        GameObject go = Manager.Resource.Instantiate($"UIs/SubItems/{name}", parent ?? Root.transform);
+        return go.GetOrAddComponent<T>();
     }
 
 
@@ -38,7 +45,7 @@ public class UIManager {
         name ??= typeof(T).Name;
 
         GameObject go = Manager.Resource.Instantiate($"UIs/Popups/{name}", Root.transform);
-        T popup = Util.GetOrAddComponent<T>(go);
+        T popup = go.GetOrAddComponent<T>();
         _popupStack.Push(popup);
         
         return popup;

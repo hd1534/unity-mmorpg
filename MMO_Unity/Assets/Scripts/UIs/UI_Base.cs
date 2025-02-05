@@ -28,6 +28,9 @@ public abstract class UI_Base : MonoBehaviour
         }
     }
 
+    protected GameObject GetObject(int idx) {
+        return Get<GameObject>(idx);
+    }
     protected Button GetButton(int idx) {
         return Get<Button>(idx);
     }
@@ -38,8 +41,8 @@ public abstract class UI_Base : MonoBehaviour
         return Get<Image>(idx);
     }
 
-    public static void AddUIEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click) {
-        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
+    public static void BindIEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click) {
+        UI_EventHandler evt = go.GetOrAddComponent<UI_EventHandler>();
 
         switch (type) {
             case Define.UIEvent.Click:

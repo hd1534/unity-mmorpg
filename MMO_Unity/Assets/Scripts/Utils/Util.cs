@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
 public class Util : MonoBehaviour {
-    public static T GetOrAddComponent<T>(GameObject go) where T : Component {
-        return go.GetComponent<T>() ?? go.AddComponent<T>();
-    }
     
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false) {
         return FindChild<Transform>(go, name, recursive)?.gameObject;

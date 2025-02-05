@@ -34,7 +34,7 @@ public class UI_Button : UI_Popup
         GetButton((int)Buttons.PointButton).gameObject.AddUIEvent(OnButtonClicked);
         
         GameObject go = GetImage((int)Images.ItemIcon).gameObject;
-        AddUIEvent(go, data => go.transform.position = data.position, Define.UIEvent.Drag);
+        BindIEvent(go, data => go.transform.position = data.position, Define.UIEvent.Drag);
     }
 
     void OnButtonClicked(PointerEventData eventData) {

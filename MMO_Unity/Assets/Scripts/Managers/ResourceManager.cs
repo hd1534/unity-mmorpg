@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResourceManager
@@ -14,7 +15,10 @@ public class ResourceManager
             return null;
         }
         
-        return Object.Instantiate(prefab, parent);
+        GameObject go = Object.Instantiate(prefab, parent);
+        go.name = go.name.Replace("(Clone)", "");
+        
+        return go;
     }
 
     public void Destroy(GameObject go) {

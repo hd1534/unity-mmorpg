@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-public class UI_Inven_item : UI_Base {
+public class UI_Inven_Item : UI_Base {
     private string _name;
     enum GameObjects {
         ItemIcon,

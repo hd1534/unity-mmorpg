@@ -22,9 +22,8 @@ public class UI_Inven : UI_Scene {
         }
 
         for (int i = 0; i < 8; i++) {
-            GameObject item = Manager.Resource.Instantiate("UIs/Scenes/UI_Inven_Item", gridPanel.transform);
-
-            UI_Inven_item invenItem = Util.GetOrAddComponent<UI_Inven_item>(item);
+            GameObject item = Manager.UI.MakeSubItem<UI_Inven_Item>(parent: gridPanel.transform).gameObject;
+            UI_Inven_Item invenItem = item.GetOrAddComponent<UI_Inven_Item>();
             invenItem.SetInfo($"item {i}");
         }
     }
