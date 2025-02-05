@@ -4,7 +4,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     [SerializeField] float _speed = 10;
 
-    private float _wait_run_ratio = 0;
     Vector3 _destinationPosition;
 
 
@@ -23,7 +22,9 @@ public class PlayerController : MonoBehaviour {
         
         Manager.Input.MouseAction -= OnMouseClicked;
         Manager.Input.MouseAction += OnMouseClicked;
-        
+
+        Manager.UI.ShowSceneUI<UI_Inven>();
+
     }
     // Update is called once per frame
     void Update() {
@@ -40,13 +41,11 @@ public class PlayerController : MonoBehaviour {
                 break;
         }
         
-        Animator animator = GetComponent<Animator>();
-        animator.Play("WAIT_RUN");
-        animator.SetFloat("wait_run_ratio", _wait_run_ratio);
     }
 
     private void UpdateIdle() {
-        _wait_run_ratio = Mathf.Lerp(_wait_run_ratio, 0f, 10 * Time.deltaTime);
+        Animator animator = GetComponent<Animator>();
+        animator.SetFloat("speed", 0);
     }
 
 
@@ -62,7 +61,8 @@ public class PlayerController : MonoBehaviour {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 10 * Time.deltaTime);
         }
         
-        _wait_run_ratio = Mathf.Lerp(_wait_run_ratio, 1f, 10 * Time.deltaTime);
+        Animator animator = GetComponent<Animator>();
+        animator.SetFloat("speed", _speed);
     }
 
 
