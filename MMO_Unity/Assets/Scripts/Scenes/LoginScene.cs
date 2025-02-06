@@ -1,0 +1,22 @@
+﻿using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class LoginScene : BaseScene {
+    protected override void Init() {
+        base.Init();
+        
+        SceneType = Define.Scene.Login;
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            SceneType = Define.Scene.Game;
+            Manager.Scene.LoadScene(Define.Scene.Game);
+        }
+    }
+
+    public override void Clear() {
+        throw new System.NotImplementedException();
+    }
+}

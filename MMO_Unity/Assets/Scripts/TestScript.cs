@@ -9,6 +9,9 @@ public class TestScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         Debug.Log($"{other.gameObject.name} triggerd");
+
+        AudioSource audio = GetComponent<AudioSource>();
+        Manager.Sound.Play("UnityChan/univ0001");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
