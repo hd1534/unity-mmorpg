@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Manager : MonoBehaviour {
@@ -10,6 +11,7 @@ public class Manager : MonoBehaviour {
         }
     }
     
+    DataManager _data = new DataManager();
     InputManager _input = new InputManager();
     PoolManager _pool = new PoolManager();
     ResourceManager _resource = new ResourceManager();
@@ -17,6 +19,7 @@ public class Manager : MonoBehaviour {
     SoundManager _sound = new SoundManager();
     UIManager _ui = new UIManager();
     
+    public static DataManager Data { get { return _instance._data; } }
     public static InputManager Input { get {return instance._input;} }
     public static PoolManager Pool { get { return instance._pool; } }
     public static ResourceManager Resource { get { return instance._resource; } }
@@ -45,7 +48,8 @@ public class Manager : MonoBehaviour {
 
             DontDestroyOnLoad(go);
             _instance = go.GetComponent<Manager>();
-            
+
+            _instance._data.Init();
             _instance._pool.Init();
             _instance._sound.Init();
         }
